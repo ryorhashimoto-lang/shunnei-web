@@ -3,107 +3,573 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI遺影作成ツール 瞬影 -SHUNNEI- | 葬儀社向け内製化DXソリューション</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>AI遺影作成ツール「瞬影-SHUNNEI」| 葬儀DXソリューション</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Noto Sans JP', sans-serif; }
-        
-        /* 斜めの背景分割 (Hero Section) */
-        .split-bg {
-            background: linear-gradient(105deg, #1f2937 50%, #eff6ff 50.1%);
-        }
-        @media (max-width: 768px) {
-            .split-bg {
-                background: linear-gradient(180deg, #1f2937 50%, #eff6ff 50.1%);
-            }
+        /* --- CSS Variables (Color Palette) --- */
+        :root {
+            --color-navy: #1a2b4b;      /* Base: 信頼のネイビー */
+            --color-navy-dark: #0f192e; /* Footer Background */
+            --color-gold: #c5a059;      /* Main Accent: 高級感 */
+            --color-gold-light: #eaddb6;
+            --color-pink: #e65f78;      /* Accent: お得感・キャンペーン */
+            --color-text: #333333;
+            --color-bg-light: #f8f9fa;
+            --color-white: #ffffff;
         }
 
-        .check-list li {
+        /* --- Reset & Base Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--color-text);
+            line-height: 1.8;
+            background-color: var(--color-white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif JP', serif; /* 見出しは明朝体で品格を */
+            line-height: 1.4;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- Components --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-gold), #b08d45);
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--color-navy);
+            border: 2px solid var(--color-white);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-navy);
+            color: white;
+            border-color: var(--color-navy);
+        }
+
+        .btn-accent {
+            background-color: var(--color-pink);
+            color: white;
+        }
+        .btn-accent:hover {
+            background-color: #d1455e;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--color-navy);
+            margin-bottom: 40px;
             position: relative;
-            padding-left: 1.5em;
-            margin-bottom: 0.5em;
+            padding-bottom: 20px;
         }
-        .check-list li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #2563eb; /* Blue-600 */
-        }
-        
-        /* 光沢アニメーション */
-        .shine-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        .shine-effect::after {
+        .section-title::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(30deg);
-            animation: shine 6s infinite;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-gold);
         }
-        @keyframes shine {
-            0% { transform: translate(-100%, -100%) rotate(30deg); }
-            20% { transform: translate(100%, 100%) rotate(30deg); }
-            100% { transform: translate(100%, 100%) rotate(30deg); }
+
+        /* --- Header --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            /* 実際の画像を使用する場合はURLを差し替えてください */
+            background: linear-gradient(rgba(26, 43, 75, 0.7), rgba(26, 43, 75, 0.5)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            color: white;
+            padding-top: 70px;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero-tag {
+            background-color: var(--color-pink);
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+        .hero h1 {
+            font-size: 3rem; /* PC size */
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero .sub-copy {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- Challenges --- */
+        .challenges {
+            background-color: var(--color-bg-light);
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .challenge-item {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-top: 4px solid #ddd;
+        }
+        .challenge-item.active {
+             border-top-color: var(--color-pink); /* 強調 */
+        }
+        .challenge-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--color-navy);
+        }
+        .challenge-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--color-navy);
+        }
+
+        /* --- Solution --- */
+        .solution {
+            background-color: var(--color-navy);
+            color: white;
+            text-align: center;
+        }
+        .solution .section-title {
+            color: white;
+        }
+        .solution .section-title::after {
+            background-color: var(--color-gold);
+        }
+        .solution p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- Key Features --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .feature-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+        }
+        .feature-header {
+            background-color: var(--color-navy);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Noto Serif JP', serif;
+        }
+        .feature-body {
+            padding: 25px;
+        }
+        .feature-body h3 {
+            color: var(--color-gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* --- Value (Graph) --- */
+        .value-section {
+            background-color: #fff;
+        }
+        .chart-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            background-color: var(--color-bg-light);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .chart-label {
+            width: 80px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .bar-wrapper {
+            flex: 1;
+            display: flex;
+            height: 50px;
+            border-radius: 25px;
+            overflow: hidden;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: bold;
+            line-height: 50px;
+            text-align: center;
+        }
+        /* Before Bars */
+        .bar-work-long {
+            width: 80%;
+            background-color: #888;
+        }
+        .bar-care-short {
+            width: 20%;
+            background-color: var(--color-gold);
+            opacity: 0.5;
+        }
+        /* After Bars */
+        .bar-work-short {
+            width: 15%;
+            background-color: #ccc;
+        }
+        .bar-care-long {
+            width: 85%;
+            background-color: var(--color-gold);
+            position: relative;
+        }
+        .bar-care-long::after {
+            content: '増えた時間をケアへ';
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+        }
+
+        /* --- Support & Flow --- */
+        .flow-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .flow-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .flow-number {
+            background-color: var(--color-navy);
+            color: var(--color-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .flow-content h3 {
+            margin-bottom: 10px;
+            color: var(--color-navy);
+        }
+
+        /* --- Footer CTA --- */
+        .footer-cta {
+            background-color: var(--color-navy-dark);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        .footer-cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .footer-cta p {
+            color: var(--color-gold);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        footer {
+            background-color: #000;
+            color: #555;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; }
+            .hero .btn { width: 100%; }
+            .chart-row { flex-direction: column; align-items: flex-start; gap: 10px;}
+            .chart-label { margin-bottom: 5px; }
+            .bar-wrapper { width: 100%; }
+            .footer-buttons { flex-direction: column; }
         }
     </style>
 </head>
-<body class="bg-white text-slate-800 antialiased">
+<body>
 
-    <header class="fixed w-full bg-white/95 backdrop-blur shadow-sm z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="text-2xl font-black text-blue-900 tracking-wider">
-                    瞬影 <span class="text-sm font-normal text-gray-500 ml-2">-SHUNNEI-</span>
-                </div>
-            </div>
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#problems" class="text-gray-600 hover:text-blue-900 transition font-medium">課題解決</a>
-                <a href="#features" class="text-gray-600 hover:text-blue-900 transition font-medium">機能・特徴</a>
-                <a href="#pricing" class="text-gray-600 hover:text-blue-900 transition font-medium">料金プラン</a>
-                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition shadow-lg font-bold">お問い合わせ</a>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">瞬影-SHUNNEI</div>
+            <nav>
+                <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">無料体験</a>
             </nav>
         </div>
     </header>
 
-    <section class="pt-24 md:h-screen min-h-[800px] flex items-center relative split-bg overflow-hidden">
-        <div class="container mx-auto px-4 h-full relative z-10 flex flex-col md:flex-row">
-            
-            <div class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-white p-8 md:pl-8 lg:pl-16 text-center md:text-left order-1 md:order-1">
-                <div class="mb-4 opacity-60">
-                    <span class="text-lg font-bold border-b border-gray-500 pb-1">Before</span>
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-tag">\ 今なら導入リスクゼロ / 初月無料キャンペーン</div>
+            <h1>想いに寄り添う時間を、もっと。<br>遺影作成を「3分」へ。</h1>
+            <p class="sub-copy">
+                熟練スキル不要。誰でも・即座に・プロ並みの品質を。<br>
+                現場の「待機時間」をなくし、本来あるべき「グリーフケア」へ注力できる環境をつくります。
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">初月無料で試してみる</a>
+                <a href="#download" class="btn btn-secondary">資料をダウンロード</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding challenges">
+        <div class="container">
+            <h2 class="section-title">葬儀の現場で、<br>このような「見えない負担」を抱えていませんか？</h2>
+            <div class="challenges-grid">
+                <div class="challenge-item">
+                    <div class="challenge-icon"><i class="far fa-clock"></i></div>
+                    <div class="challenge-title">現場を圧迫する<br>「待ち時間」</div>
+                    <p>写真加工の戻りを待つ間、現場スタッフの動きが止まっていませんか？</p>
                 </div>
-                <h2 class="text-5xl md:text-6xl font-black mb-2 tracking-tighter text-gray-200">
-                    半日
-                </h2>
-                <p class="text-lg md:text-xl font-bold text-gray-400 mb-6 md:mb-0">
-                    熟練技術が必要<br>
-                    <span class="text-sm font-normal opacity-70">旧来の写真加工作業</span>
-                </p>
-                <div class="opacity-20 text-6xl mt-4 hidden md:block">
-                    <i class="fa-regular fa-clock"></i>
+                <div class="challenge-item active">
+                    <div class="challenge-icon"><i class="fas fa-coins"></i></div>
+                    <div class="challenge-title">高騰する<br>「外注コスト」</div>
+                    <p>外注費の高騰により、施行ごとの粗利が圧迫されていませんか？</p>
+                </div>
+                <div class="challenge-item">
+                    <div class="challenge-icon"><i class="fas fa-user-cog"></i></div>
+                    <div class="challenge-title">属人化する<br>「専門スキル」</div>
+                    <p>画像加工ができる特定のスタッフに業務が集中していませんか？</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="w-full md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 z-30 px-4 order-2 md:order-none my-8 md:my-0">
-                <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-10 text-center border border-white/50 ring-1 ring-gray-100">
-                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-black leading-tight text-slate-900 mb-6">
-                        遺影作成を<span class="text-blue-600">「内製化」</span>し、<br>
-                        利益と顧客満足度を<br class="md:hidden">最大化。
-                    </h1>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-center justify-center text-sm md:text-base font-bold text-slate-700">
-                            <i class="fa-solid fa-check text-blue-600 mr-2"></i>
-                            <span>熟練スタッフ不要。<br class="md:hidden">アルバイト・パートでも数クリック。</span>
-                        </div>
-                        <div class="inline-block bg-blue-50 px-4 py-2 rounded-lg border border-blue-
+    <section class="section-padding solution">
+        <div class="container">
+            <h2 class="section-title">AI遺影作成ツール「瞬影-SHUNNEI」</h2>
+            <p>「瞬影」は、葬儀社様の「人時生産性」を最大化する内製化DXソリューションです。<br><br>
+            Photoshop等の専門ソフトは一切不要。<br>アルバイトやパートスタッフの方でも、直感的な操作ですぐに高品質な遺影を作成できます。</p>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">選ばれる3つの理由</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-header">Reason 01</div>
+                    <div class="feature-body">
+                        <h3>圧倒的なスピード<br><small>リードタイムを「半日」→「3分」へ</small></h3>
+                        <p>外注や手作業で数時間かかっていた写真関連業務を、わずか数分に短縮。「待ち時間ゼロ」を実現することで、ご遺族をお待たせしません。</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">Reason 02</div>
+                    <div class="feature-body">
+                        <h3>誰でもプロ品質<br><small>AIによる自動補正・着せ替え</small></h3>
+                        <p>高度なAIが、写真の高画質化から着せ替えまでを自動でサポート。専門スキルがなくても、誰もが均一で高品質な成果物を作成できます。</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-header">Reason 03</div>
+                    <div class="feature-body">
+                        <h3>コスト構造の変革<br><small>外注費の固定費化</small></h3>
+                        <p>施行件数ごとに発生していた外注費（変動費）を、システム利用料（固定費）へ切り替え。施行件数が増えるほど1件あたりのコストが下がり、高収益体質へ。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding value-section">
+        <div class="container">
+            <h2 class="section-title">創出された時間は、ご遺族のために。</h2>
+            <p style="text-align: center;">削減した時間を、ご遺族への丁寧な接客やヒアリングに投資し、CS向上と働き方改革を実現します。</p>
+            
+            <div class="chart-container">
+                <div class="chart-row">
+                    <div class="chart-label">Before</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-work-long">加工・待機（2h〜）</div>
+                        <div class="bar-care-short">接客</div>
+                    </div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">After</div>
+                    <div class="bar-wrapper">
+                        <div class="bar-work-short">15分</div>
+                        <div class="bar-care-long">丁寧な接客・グリーフケア</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: var(--color-bg-light);">
+        <div class="container">
+            <h2 class="section-title">即日発行・初月無料。<br>リスクゼロで始める「内製化」ステップ</h2>
+            <div class="flow-list">
+                <div class="flow-item">
+                    <div class="flow-number">1</div>
+                    <div class="flow-content">
+                        <h3>アカウント即日発行</h3>
+                        <p>面倒なインストールは不要。クラウド型なので、お申し込み後すぐにIDを発行します。</p>
+                    </div>
+                </div>
+                <div class="flow-item">
+                    <div class="flow-number">2</div>
+                    <div class="flow-content">
+                        <h3>操作マニュアルのご提供</h3>
+                        <p>誰でも迷わず操作できる「わかりやすいマニュアル」をお渡しします。直感的なシステムなので、すぐに業務利用が可能です。</p>
+                    </div>
+                </div>
+                <div class="flow-item">
+                    <div class="flow-number">3</div>
+                    <div class="flow-content">
+                        <h3>初月無料トライアル開始</h3>
+                        <p>最初の1ヶ月は利用料無料。既存の業者様と併用しながら、実際の現場で効果をご体感ください。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-cta" id="contact">
+        <div class="container">
+            <h2>まずは、その「速さ」と「品質」をご体感ください。</h2>
+            <p>初月無料キャンペーン実施中</p>
+            <div class="footer-buttons">
+                <a href="#" class="btn btn-primary" style="min-width: 250px;">初月無料で利用を開始する</a>
+                <a href="#" class="btn btn-secondary" style="min-width: 250px; border-color:white; color:var(--color-navy);">資料をダウンロードする</a>
+            </div>
+            <p class="footer-note">インストール不要・即日利用開始可能 / 違約金なし・いつでも解約可能</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Shunnei AI Tool. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
