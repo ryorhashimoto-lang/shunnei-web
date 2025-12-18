@@ -1,52 +1,109 @@
-<section class="pt-20 md:h-screen min-h-[700px] flex items-center relative split-bg overflow-hidden">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI遺影作成ツール 瞬影 -SHUNNEI- | 葬儀社向け内製化DXソリューション</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        
+        /* 斜めの背景分割 (Hero Section) */
+        .split-bg {
+            background: linear-gradient(105deg, #1f2937 50%, #eff6ff 50.1%);
+        }
+        @media (max-width: 768px) {
+            .split-bg {
+                background: linear-gradient(180deg, #1f2937 50%, #eff6ff 50.1%);
+            }
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .check-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #2563eb; /* Blue-600 */
+        }
+        
+        /* 光沢アニメーション */
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            animation: shine 6s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translate(-100%, -100%) rotate(30deg); }
+            20% { transform: translate(100%, 100%) rotate(30deg); }
+            100% { transform: translate(100%, 100%) rotate(30deg); }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+    <header class="fixed w-full bg-white/95 backdrop-blur shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-black text-blue-900 tracking-wider">
+                    瞬影 <span class="text-sm font-normal text-gray-500 ml-2">-SHUNNEI-</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#problems" class="text-gray-600 hover:text-blue-900 transition font-medium">課題解決</a>
+                <a href="#features" class="text-gray-600 hover:text-blue-900 transition font-medium">機能・特徴</a>
+                <a href="#pricing" class="text-gray-600 hover:text-blue-900 transition font-medium">料金プラン</a>
+                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition shadow-lg font-bold">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="pt-24 md:h-screen min-h-[800px] flex items-center relative split-bg overflow-hidden">
         <div class="container mx-auto px-4 h-full relative z-10 flex flex-col md:flex-row">
             
-            <div class="w-full md:w-1/2 flex flex-col justify-start md:justify-center items-center md:items-start text-white p-8 md:pr-16 text-center md:text-left pt-20 md:pt-0">
-                <div class="mb-6 opacity-60">
+            <div class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-white p-8 md:pl-8 lg:pl-16 text-center md:text-left order-1 md:order-1">
+                <div class="mb-4 opacity-60">
                     <span class="text-lg font-bold border-b border-gray-500 pb-1">Before</span>
                 </div>
-                <h2 class="text-4xl md:text-6xl font-black mb-2 tracking-tighter text-gray-200">
+                <h2 class="text-5xl md:text-6xl font-black mb-2 tracking-tighter text-gray-200">
                     半日
                 </h2>
-                <p class="text-lg md:text-xl font-bold text-gray-400 mb-8">
-                    熟練技術と時間が必要
+                <p class="text-lg md:text-xl font-bold text-gray-400 mb-6 md:mb-0">
+                    熟練技術が必要<br>
+                    <span class="text-sm font-normal opacity-70">旧来の写真加工作業</span>
                 </p>
+                <div class="opacity-20 text-6xl mt-4 hidden md:block">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
             </div>
 
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4 z-30">
-                <div class="max-w-3xl mx-auto bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-10 text-center border border-white/50">
-                    <h1 class="text-2xl md:text-5xl font-black leading-snug text-slate-900 mb-6">
+            <div class="w-full md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2 z-30 px-4 order-2 md:order-none my-8 md:my-0">
+                <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-10 text-center border border-white/50 ring-1 ring-gray-100">
+                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-black leading-tight text-slate-900 mb-6">
                         遺影作成を<span class="text-blue-600">「内製化」</span>し、<br>
-                        利益と顧客満足度を最大化。
+                        利益と顧客満足度を<br class="md:hidden">最大化。
                     </h1>
                     
-                    <div class="space-y-3">
-                        <p class="text-sm md:text-xl font-bold text-slate-700">
-                            <i class="fa-solid fa-check text-blue-600 mr-2"></i>熟練スタッフ不要。アルバイト・パートでも数クリック。
-                        </p>
-                        <p class="text-sm md:text-lg text-slate-600 font-medium bg-blue-50 inline-block px-4 py-1 rounded-full">
-                            「半日」かかっていた写真加工を<span class="text-blue-600 font-bold text-xl mx-1">「3分」</span>へ。
-                        </p>
-                    </div>
-
-                    <div class="mt-8">
-                        <a href="#contact" class="inline-block bg-yellow-500 text-blue-900 font-bold px-10 py-4 rounded-lg shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1 w-full md:w-auto">
-                            無料でデモを体験する
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/2 flex flex-col justify-end md:justify-center items-center md:items-end text-slate-800 p-8 md:pl-16 text-center md:text-right pb-20 md:pb-0">
-                <div class="mb-6">
-                    <span class="text-lg font-bold border-b border-blue-200 pb-1 text-blue-600">After</span>
-                </div>
-                <h2 class="text-4xl md:text-6xl font-black mb-2 tracking-tighter text-blue-600 shine-effect">
-                    3分
-                </h2>
-                <p class="text-lg md:text-xl font-bold text-slate-600 mb-8">
-                    AIで自動化・高品質
-                </p>
-            </div>
-        </div>
-    </section>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center justify-center text-sm md:text-base font-bold text-slate-700">
+                            <i class="fa-solid fa-check text-blue-600 mr-2"></i>
+                            <span>熟練スタッフ不要。<br class="md:hidden">アルバイト・パートでも数クリック。</span>
+                        </div>
+                        <div class="inline-block bg-blue-50 px-4 py-2 rounded-lg border border-blue-
