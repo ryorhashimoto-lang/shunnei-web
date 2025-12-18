@@ -1,426 +1,52 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI遺影作成ツール 瞬影 -SHUNNEI- | 葬儀社向け内製化DXソリューション</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Noto Sans JP', sans-serif; }
-        
-        /* 斜めの背景分割 (Hero Section) */
-        .split-bg {
-            background: linear-gradient(105deg, #1f2937 50%, #eff6ff 50.1%);
-        }
-        @media (max-width: 768px) {
-            .split-bg {
-                background: linear-gradient(180deg, #1f2937 50%, #eff6ff 50.1%);
-            }
-        }
-
-        .check-list li {
-            position: relative;
-            padding-left: 1.5em;
-            margin-bottom: 0.5em;
-        }
-        .check-list li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #2563eb; /* Blue-600 */
-        }
-        
-        /* 光沢アニメーション */
-        .shine-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        .shine-effect::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(30deg);
-            animation: shine 6s infinite;
-        }
-        @keyframes shine {
-            0% { transform: translate(-100%, -100%) rotate(30deg); }
-            20% { transform: translate(100%, 100%) rotate(30deg); }
-            100% { transform: translate(100%, 100%) rotate(30deg); }
-        }
-    </style>
-</head>
-<body class="bg-white text-slate-800 antialiased">
-
-    <header class="fixed w-full bg-white/95 backdrop-blur shadow-sm z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <div class="text-2xl font-black text-blue-900 tracking-wider">
-                    瞬影 <span class="text-sm font-normal text-gray-500 ml-2">-SHUNNEI-</span>
-                </div>
-            </div>
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#problems" class="text-gray-600 hover:text-blue-900 transition font-medium">課題解決</a>
-                <a href="#features" class="text-gray-600 hover:text-blue-900 transition font-medium">機能・特徴</a>
-                <a href="#pricing" class="text-gray-600 hover:text-blue-900 transition font-medium">料金プラン</a>
-                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition shadow-lg font-bold">お問い合わせ</a>
-            </nav>
-        </div>
-    </header>
-
-    <section class="pt-20 md:h-screen min-h-[700px] flex items-center relative split-bg overflow-hidden">
+<section class="pt-20 md:h-screen min-h-[700px] flex items-center relative split-bg overflow-hidden">
         <div class="container mx-auto px-4 h-full relative z-10 flex flex-col md:flex-row">
             
-            <div class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-white p-8 md:pr-16 text-center md:text-left">
-                <div class="mb-6 opacity-80">
-                    <span class="text-xl font-bold border-b border-gray-500 pb-1">Before</span>
+            <div class="w-full md:w-1/2 flex flex-col justify-start md:justify-center items-center md:items-start text-white p-8 md:pr-16 text-center md:text-left pt-20 md:pt-0">
+                <div class="mb-6 opacity-60">
+                    <span class="text-lg font-bold border-b border-gray-500 pb-1">Before</span>
                 </div>
-                <h2 class="text-4xl md:text-6xl font-black mb-4 tracking-tighter text-gray-200">
+                <h2 class="text-4xl md:text-6xl font-black mb-2 tracking-tighter text-gray-200">
                     半日
                 </h2>
-                <p class="text-xl md:text-2xl font-bold text-gray-400 mb-8">
-                    熟練技術が必要<br>
-                    <span class="text-base font-normal">旧来の写真加工作業</span>
+                <p class="text-lg md:text-xl font-bold text-gray-400 mb-8">
+                    熟練技術と時間が必要
                 </p>
-                <div class="opacity-30 text-6xl">
-                    <i class="fa-regular fa-clock"></i>
+            </div>
+
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4 z-30">
+                <div class="max-w-3xl mx-auto bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-10 text-center border border-white/50">
+                    <h1 class="text-2xl md:text-5xl font-black leading-snug text-slate-900 mb-6">
+                        遺影作成を<span class="text-blue-600">「内製化」</span>し、<br>
+                        利益と顧客満足度を最大化。
+                    </h1>
+                    
+                    <div class="space-y-3">
+                        <p class="text-sm md:text-xl font-bold text-slate-700">
+                            <i class="fa-solid fa-check text-blue-600 mr-2"></i>熟練スタッフ不要。アルバイト・パートでも数クリック。
+                        </p>
+                        <p class="text-sm md:text-lg text-slate-600 font-medium bg-blue-50 inline-block px-4 py-1 rounded-full">
+                            「半日」かかっていた写真加工を<span class="text-blue-600 font-bold text-xl mx-1">「3分」</span>へ。
+                        </p>
+                    </div>
+
+                    <div class="mt-8">
+                        <a href="#contact" class="inline-block bg-yellow-500 text-blue-900 font-bold px-10 py-4 rounded-lg shadow-lg hover:bg-yellow-400 transition transform hover:-translate-y-1 w-full md:w-auto">
+                            無料でデモを体験する
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl text-center z-20 pointer-events-none px-4 mt-8 md:mt-0">
-                <h1 class="text-3xl md:text-5xl font-black leading-tight drop-shadow-2xl bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 md:p-10 text-white md:text-slate-800 md:bg-white/90 md:shadow-2xl">
-                    遺影作成を<span class="text-blue-600">『内製化』</span>し、<br>
-                    利益と顧客満足度を最大化。
-                </h1>
-                <p class="mt-4 text-white md:text-gray-600 font-bold text-sm md:text-lg drop-shadow-md md:drop-shadow-none">
-                    熟練スタッフ不要。アルバイト・パートスタッフでも数クリック。
-                </p>
-            </div>
-
-            <div class="w-full md:w-1/2 flex flex-col justify-center items-center md:items-end text-slate-800 p-8 md:pl-16 text-center md:text-right mt-12 md:mt-0">
+            <div class="w-full md:w-1/2 flex flex-col justify-end md:justify-center items-center md:items-end text-slate-800 p-8 md:pl-16 text-center md:text-right pb-20 md:pb-0">
                 <div class="mb-6">
-                    <span class="text-xl font-bold border-b border-blue-200 pb-1 text-blue-600">After</span>
+                    <span class="text-lg font-bold border-b border-blue-200 pb-1 text-blue-600">After</span>
                 </div>
-                <h2 class="text-5xl md:text-7xl font-black mb-4 tracking-tighter text-blue-600 shine-effect">
+                <h2 class="text-4xl md:text-6xl font-black mb-2 tracking-tighter text-blue-600 shine-effect">
                     3分
                 </h2>
-                <p class="text-xl md:text-2xl font-bold text-slate-600 mb-8">
-                    数クリックで完了<br>
-                    <span class="text-base font-normal">内製化AIツール</span>
-                </p>
-                <div class="text-blue-200 text-6xl animate-pulse">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                
-                <div class="mt-8 pointer-events-auto">
-                    <a href="#contact" class="inline-block bg-yellow-500 text-blue-900 font-bold px-8 py-4 rounded-lg shadow-xl hover:bg-yellow-400 transition transform hover:-translate-y-1">
-                        無料でデモを体験する
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="problems" class="py-20 bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-slate-800 mb-4">遺影作成の「外注」で<br class="md:hidden">利益を逃していませんか？</h2>
-            [cite_start]<p class="text-gray-500 mb-16">多くの葬儀社様が抱える3つの課題 [cite: 4, 6, 7, 8]</p>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="p-8 bg-gray-50 rounded-xl border border-gray-100">
-                    <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                        <i class="fa-solid fa-coins"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">外注費による利益圧迫</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        件数が増えるごとに外注費（変動費）も増加。売上は上がっても、手元に残る粗利が増えにくい構造になっています。
-                    </p>
-                </div>
-                <div class="p-8 bg-gray-50 rounded-xl border border-gray-100">
-                    <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">写真待ちのロスタイム</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        データの送信から納品まで半日以上かかることも。「待ち時間」が現場スタッフの長時間拘束を招いています。
-                    </p>
-                </div>
-                <div class="p-8 bg-gray-50 rounded-xl border border-gray-100">
-                    <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">
-                        <i class="fa-solid fa-user-xmark"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">属人化する加工作業</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        社内で加工しようにも、Photoshop等の専門スキルを持つスタッフしか対応できず、急な依頼に対応できません。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="py-20 bg-slate-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4">瞬影 -SHUNNEI- が実現する<br>「高収益体質」への転換</h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-blue-600">
-                    <h3 class="text-2xl font-bold mb-2 text-gray-800">外注費を「固定費」へ</h3>
-                    [cite_start]<p class="text-sm text-gray-500 mb-8">変動費モデルから固定費モデルへの転換で、損益分岐点を引き下げます [cite: 10, 24]</p>
-                    
-                    <div class="space-y-6">
-                        <div class="relative pl-16">
-                            <div class="absolute left-0 top-2 text-gray-400 font-bold text-sm w-12 text-right">Before</div>
-                            <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
-                                <p class="text-sm font-bold text-gray-600 mb-2">外注費 (変動費)</p>
-                                <div class="flex gap-1">
-                                    <div class="h-8 bg-gray-400 rounded w-1/4"></div>
-                                    <div class="h-8 bg-gray-400 rounded w-1/4"></div>
-                                    <div class="h-8 bg-gray-400 rounded w-1/4"></div>
-                                    <div class="h-8 bg-gray-400 rounded w-1/4"></div>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-2">施行件数が増えるほどコストも比例して増加</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex justify-center text-blue-400 text-2xl">
-                            <i class="fa-solid fa-arrow-down"></i>
-                        </div>
-
-                        <div class="relative pl-16">
-                            <div class="absolute left-0 top-2 text-blue-600 font-bold text-sm w-12 text-right">After</div>
-                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                                <div class="flex justify-between items-center mb-2">
-                                    <p class="text-sm font-bold text-blue-800">瞬影システム利用料 (固定費)</p>
-                                    <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded">コスト大幅圧縮</span>
-                                </div>
-                                <div class="h-8 bg-blue-600 rounded w-1/2 shadow-lg shine-effect"></div>
-                                <p class="text-xs text-blue-800 mt-2 font-bold">
-                                    件数が増えてもコストは一定。<br>
-                                    作れば作るほど、1枚あたりの単価が下がります。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-8">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                            <i class="fa-solid fa-gauge-high"></i>
-                        </div>
-                        <div class="ml-4">
-                            [cite_start]<h4 class="text-xl font-bold text-gray-800">専門スキル不要で「即座に」作成 [cite: 12, 13]</h4>
-                            <p class="text-gray-600 mt-2">
-                                直感的な操作画面で、Photoshop等のスキルは一切不要。
-                                アルバイトスタッフの方でも、最短3分でプロ品質の遺影を作成できます。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                            <i class="fa-solid fa-wand-sparkles"></i>
-                        </div>
-                        <div class="ml-4">
-                            [cite_start]<h4 class="text-xl font-bold text-gray-800">AIによる高度な編集機能 [cite: 16]</h4>
-                            <p class="text-gray-600 mt-2">
-                                背景の除去・変更、画質補正はもちろん、**着せ替え（礼服/着物）や白黒写真のカラー化**まで、AIが自動で美しく仕上げます。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white text-xl shadow-md">
-                            <i class="fa-solid fa-heart-circle-plus"></i>
-                        </div>
-                        <div class="ml-4">
-                            [cite_start]<h4 class="text-xl font-bold text-gray-800">創出された時間を顧客満足へ [cite: 28, 29]</h4>
-                            <p class="text-gray-600 mt-2">
-                                写真業務を短縮した分、ご遺族様へのグリーフケアや丁寧な接客に注力できます。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">料金プラン</h2>
-                <p class="text-gray-500">
-                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded font-bold">全プラン機能制限なし</span><br>
-                    貴社の月間施行件数に合わせてお選びいただけます。
+                <p class="text-lg md:text-xl font-bold text-slate-600 mb-8">
+                    AIで自動化・高品質
                 </p>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-end">
-                <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition relative">
-                    <h3 class="text-xl font-bold text-gray-700 text-center mb-2">ライトプラン</h3>
-                    <p class="text-xs text-gray-400 text-center mb-6">小規模・単独ホール向け<br>(月間施行 20件未満)</p>
-                    <div class="text-center mb-6">
-                        <span class="text-3xl font-bold text-gray-800">50,000</span>
-                        <span class="text-sm text-gray-500">円/月 (税別)</span>
-                    </div>
-                    
-                    <ul class="space-y-4 text-sm text-gray-600 mb-8 check-list">
-                        <li class="font-bold border-b pb-2">作成枚数：月30枚まで<br><span class="text-xs text-gray-400 font-normal">超過分は従量課金</span></li>
-                        <li>背景変更/除去</li>
-                        <li>AI画質補正</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">AI着せ替え(礼服/着物)</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">白黒写真カラー化</li>
-                    </ul>
-                    <a href="#contact" class="block w-full py-3 border border-blue-600 text-blue-600 font-bold text-center rounded-lg hover:bg-blue-50 transition">
-                        スモールスタートする
-                    </a>
-                </div>
-
-                <div class="bg-white rounded-2xl border-2 border-blue-600 p-8 shadow-2xl relative transform md:-translate-y-4">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-400 text-blue-900 text-sm font-bold px-4 py-1 rounded-full shadow-md">
-                        推奨プラン
-                    </div>
-                    <h3 class="text-2xl font-bold text-blue-900 text-center mb-2">スタンダードプラン</h3>
-                    <p class="text-xs text-gray-400 text-center mb-6">中堅葬儀社向け<br>(月間施行 50件前後)</p>
-                    <div class="text-center mb-6">
-                        <span class="text-4xl font-bold text-blue-600">150,000</span>
-                        <span class="text-sm text-gray-500">円/月 (税別)</span>
-                    </div>
-                    
-                    <ul class="space-y-4 text-sm text-gray-600 mb-8 check-list">
-                        <li class="font-bold border-b pb-2 text-lg">作成枚数：月100枚まで<br><span class="text-xs text-gray-400 font-normal">超過分は従量課金</span></li>
-                        <li>背景変更/除去</li>
-                        <li>AI画質補正</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">AI着せ替え(礼服/着物)</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">白黒写真カラー化</li>
-                    </ul>
-                    <p class="text-xs text-center text-gray-500 mb-6">
-                        最もコストパフォーマンスが高く、<br>多くの葬儀社様に選ばれています。
-                    </p>
-                    <a href="#contact" class="block w-full py-4 bg-blue-600 text-white font-bold text-center rounded-lg hover:bg-blue-700 transition shadow-lg">
-                        お問い合わせ・導入相談
-                    </a>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition">
-                    <h3 class="text-xl font-bold text-gray-700 text-center mb-2">エンタープライズ</h3>
-                    <p class="text-xs text-gray-400 text-center mb-6">大手・多店舗展開向け<br>(年間 1,000件以上)</p>
-                    <div class="text-center mb-6">
-                        <span class="text-2xl font-bold text-gray-800">要お見積もり</span>
-                        <br><span class="text-xs text-gray-400">(拠点課金型)</span>
-                    </div>
-                    
-                    <ul class="space-y-4 text-sm text-gray-600 mb-8 check-list">
-                        <li class="font-bold border-b pb-2">無制限（使い放題）<br><span class="text-xs text-gray-400 font-normal">定額制で枚数を気にせず利用</span></li>
-                        <li>背景変更/除去</li>
-                        <li>AI画質補正</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">AI着せ替え(礼服/着物)</li>
-                        <li class="text-blue-600 font-bold bg-blue-50 px-2 rounded">白黒写真カラー化</li>
-                    </ul>
-                    <a href="#contact" class="block w-full py-3 border border-gray-300 text-gray-600 font-bold text-center rounded-lg hover:bg-gray-50 transition">
-                        お見積もり依頼
-                    </a>
-                </div>
-            </div>
         </div>
     </section>
-
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                [cite_start]<h2 class="text-3xl font-bold text-gray-800 mb-4">現場負担ゼロを目指す導入サポート [cite: 42, 49]</h2>
-                <p class="text-gray-600">
-                    導入から定着まで、専任のCS（カスタマーサクセス）チームが伴走します。<br>
-                    既存業者との併用スタートなど、リスクのない運用をご提案します。
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-400">
-                    <div class="text-4xl text-blue-100 font-black mb-2">01</div>
-                    <h4 class="font-bold text-lg mb-2">即日アカウント発行</h4>
-                    <p class="text-sm text-gray-500">お申し込み後、すぐにアカウントを発行。PCへのインストールは不要で、ブラウザからすぐにご利用可能です。</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
-                    <div class="text-4xl text-blue-100 font-black mb-2">02</div>
-                    <h4 class="font-bold text-lg mb-2">オンライン説明会</h4>
-                    <p class="text-sm text-gray-500">現場スタッフ様向けに、Zoom等で操作説明会を実施。誰でも使えるようになるまで丁寧にレクチャーします。</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-600">
-                    <div class="text-4xl text-blue-100 font-black mb-2">03</div>
-                    <h4 class="font-bold text-lg mb-2">トライアル・並行運用</h4>
-                    <p class="text-sm text-gray-500">まずは簡単な案件から内製化。既存の外注先と併用しながら、徐々に移行比率を高めていく運用も可能です。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="py-24 bg-gradient-to-br from-blue-900 to-slate-900 text-white">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">まずは、デモで「3分作成」をご体感ください</h2>
-                <p class="text-blue-200 text-lg">
-                    現状のコスト試算や、貴社に最適な導入プランをご提案いたします。<br>
-                    無理な営業は一切いたしませんので、お気軽にご相談ください。
-                </p>
-            </div>
-            
-            <form class="bg-white rounded-xl p-8 shadow-2xl text-left max-w-2xl mx-auto text-gray-700">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-bold mb-2">会社名 <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="株式会社〇〇葬祭">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold mb-2">ご担当者名 <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="山田 太郎">
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-bold mb-2">メールアドレス <span class="text-red-500">*</span></label>
-                    <input type="email" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition" placeholder="sample@example.com">
-                </div>
-                <div class="mb-8">
-                    <label class="block text-sm font-bold mb-2">お問い合わせ内容</label>
-                    <select class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mb-4">
-                        <option>デモ画面を見てみたい</option>
-                        <option>料金の詳細・見積もりが欲しい</option>
-                        <option>資料だけ欲しい</option>
-                        <option>その他</option>
-                    </select>
-                    <textarea class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 h-24 focus:bg-white transition" placeholder="ご質問やご要望があればご記入ください"></textarea>
-                </div>
-                <button type="button" class="w-full bg-yellow-500 text-blue-900 font-bold py-4 rounded-lg hover:bg-yellow-400 transition shadow-lg transform active:scale-95 text-lg">
-                    お問い合わせ・資料請求（無料）
-                </button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900 text-gray-500 py-12 text-sm border-t border-gray-800">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0 text-center md:text-left">
-                <span class="text-xl font-black text-white block mb-1">瞬影 -SHUNNEI-</span>
-                <p>葬儀社専用 AI遺影作成クラウド</p>
-            </div>
-            <div class="flex flex-col md:flex-row gap-4 md:gap-8 text-center">
-                <a href="#" class="hover:text-white transition">運営会社</a>
-                <a href="#" class="hover:text-white transition">利用規約</a>
-                <a href="#" class="hover:text-white transition">プライバシーポリシー</a>
-                <a href="#" class="hover:text-white transition">特定商取引法に基づく表記</a>
-            </div>
-            <div class="mt-8 md:mt-0 text-gray-600">
-                &copy; Shunnei All Rights Reserved.
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
