@@ -25,7 +25,7 @@
 
         /* --- Reset & Base Styles --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; } /* 滑らかなスクロール */
+        html { scroll-behavior: smooth; }
         body { font-family: 'Noto Sans JP', sans-serif; color: var(--color-text); line-height: 1.8; background-color: var(--color-white); }
         h1, h2, h3, h4 { font-family: 'Noto Serif JP', serif; line-height: 1.4; }
         a { text-decoration: none; transition: 0.3s; }
@@ -66,7 +66,6 @@
         .header-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--color-navy); font-family: 'Noto Serif JP', serif; }
         
-        /* Header Navigation Styles */
         .header-nav { display: flex; align-items: center; gap: 20px; }
         .nav-link {
             color: var(--color-navy); font-weight: 500; font-size: 0.95rem; position: relative;
@@ -193,9 +192,8 @@
             .bar-wrapper { width: 100%; }
             .bar-segment { font-size: 0.8rem; } 
             .form-container { padding: 20px; }
-            /* Header Mobile Adjustments */
             .logo { font-size: 1.2rem; }
-            .nav-link { display: none; } /* スマホではスペースの都合上「お問い合わせ」テキストリンクを隠し、ボタンのみにするのが一般的ですが、必要なら表示できます */
+            .nav-link { display: none; }
         }
     </style>
 </head>
@@ -391,7 +389,7 @@
                             送信する
                         </button>
                         <p style="font-size: 0.8rem; margin-top: 15px; color: #888;">
-                            ※個人情報の取り扱いについては<a href="#" style="text-decoration: underline;">プライバシーポリシー</a>をご確認ください。
+                            ※個人情報の取り扱いについては<a href="privacy.html" target="_blank" style="text-decoration: underline;">プライバシーポリシー</a>をご確認ください。
                         </p>
                     </div>
                 </form>
