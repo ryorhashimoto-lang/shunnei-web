@@ -25,6 +25,7 @@
 
         /* --- Reset & Base Styles --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; } /* 滑らかなスクロール */
         body { font-family: 'Noto Sans JP', sans-serif; color: var(--color-text); line-height: 1.8; background-color: var(--color-white); }
         h1, h2, h3, h4 { font-family: 'Noto Serif JP', serif; line-height: 1.4; }
         a { text-decoration: none; transition: 0.3s; }
@@ -64,6 +65,13 @@
         }
         .header-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--color-navy); font-family: 'Noto Serif JP', serif; }
+        
+        /* Header Navigation Styles */
+        .header-nav { display: flex; align-items: center; gap: 20px; }
+        .nav-link {
+            color: var(--color-navy); font-weight: 500; font-size: 0.95rem; position: relative;
+        }
+        .nav-link:hover { color: var(--color-gold); }
 
         /* --- Hero Section --- */
         .hero {
@@ -109,7 +117,7 @@
         .feature-body { padding: 25px; }
         .feature-body h3 { color: var(--color-gold); margin-bottom: 15px; font-size: 1.2rem; }
 
-        /* --- Value (Graph) UPDATE --- */
+        /* --- Value (Graph) --- */
         .value-section { background-color: #fff; }
         .chart-container {
             max-width: 800px; margin: 40px auto 0; background-color: var(--color-bg-light);
@@ -125,13 +133,9 @@
             display: flex; align-items: center; justify-content: center;
             height: 100%; white-space: nowrap; overflow: hidden; padding: 0 10px;
         }
-        
-        /* Bar Colors & Widths */
         .bar-gray { background-color: #888; }
         .bar-gray-light { background-color: #ccc; }
         .bar-gold { background-color: var(--color-gold); }
-        
-        /* Specific widths */
         .w-80 { width: 80%; }
         .w-20 { width: 20%; opacity: 0.7; }
         .w-15 { width: 15%; }
@@ -149,7 +153,7 @@
             align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; flex-shrink: 0;
         }
 
-        /* --- Form Section (NEW) --- */
+        /* --- Form Section --- */
         .contact-section { background-color: var(--color-bg-light); }
         .form-container {
             max-width: 800px; margin: 0 auto; background: white;
@@ -173,7 +177,7 @@
         textarea.form-control { resize: vertical; min-height: 120px; }
         .form-submit-wrapper { text-align: center; margin-top: 30px; }
         
-        /* --- Footer CTA & Copyright --- */
+        /* --- Footer CTA --- */
         .footer-cta {
             background-color: var(--color-navy-dark); color: white;
             text-align: center; padding: 60px 0;
@@ -185,14 +189,13 @@
             .hero h1 { font-size: 2rem; }
             .hero-buttons { flex-direction: column; }
             .hero .btn { width: 100%; }
-            
-            /* Graph Mobile Adjustments */
             .chart-row { flex-direction: column; align-items: flex-start; gap: 5px; }
             .bar-wrapper { width: 100%; }
-            .bar-segment { font-size: 0.8rem; } /* Font smaller on mobile */
-            
-            /* Form Mobile Adjustments */
+            .bar-segment { font-size: 0.8rem; } 
             .form-container { padding: 20px; }
+            /* Header Mobile Adjustments */
+            .logo { font-size: 1.2rem; }
+            .nav-link { display: none; } /* スマホではスペースの都合上「お問い合わせ」テキストリンクを隠し、ボタンのみにするのが一般的ですが、必要なら表示できます */
         }
     </style>
 </head>
@@ -201,7 +204,8 @@
     <header>
         <div class="container header-inner">
             <div class="logo">瞬影-SHUNNEI</div>
-            <nav>
+            <nav class="header-nav">
+                <a href="#contact-form" class="nav-link">お問い合わせ</a>
                 <a href="#contact-form" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">無料体験</a>
             </nav>
         </div>
